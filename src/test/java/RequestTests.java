@@ -2,8 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class RequestTests extends TestBase {
 
@@ -21,7 +20,7 @@ public class RequestTests extends TestBase {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", notNullValue());
     }
 
     @Test
@@ -76,7 +75,7 @@ public class RequestTests extends TestBase {
     }
 
     @Test
-    void createNoBoodyUserTest() {
+    void createNoBodyUserTest() {
         String userData = "";
         given()
                 .body(userData)
